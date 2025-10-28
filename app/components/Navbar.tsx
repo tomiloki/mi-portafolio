@@ -7,13 +7,13 @@ export default function Navbar() {
             <div className=" container mx-auto flex justify-between items-center">
                 {/* Tu Nombre (A la izquierda) */}
                 <Link href="/" className="text-xl font-bold">
-                    Tomás Escalante
+                    Mi Portafolio
                 </Link>
 
                 {/* Links (a la derecha) */}
                 <div className="flex gap-x-6">
-                    <Link href="#sobre-mi" className="hover:text-sky-400 transition-colors">
-                        Sobre Mí
+                    <Link href="#inicio" className="hover:text-sky-400 transition-colors">
+                        Inicio
                     </Link>
                     
                     {/* CAMBIO AQUÍ */}

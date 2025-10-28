@@ -1,73 +1,90 @@
 // app/page.tsx
-import Link from 'next/link'; // Importamos Link para el botón
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import ProjectCard from './components/ProjectCard';
+import { ChevronRight, Github, Linkedin, Mail } from 'lucide-react';
+
+// Listas para evitar repetición
+const SOFT_SKILLS: string[] = [
+  'Resolución de Problemas',
+  'Documentación Técnica',
+  'Comunicación Efectiva',
+  'Adaptabilidad y Aprendizaje Rápido',
+  'Trabajo en equipo',
+];
+
+const INTERESTS: string[] = [
+  'Desarrollo Full-Stack (Web)',
+  'Machine Learning & IA',
+  'Automatización de Procesos',
+  'Arquitectura de Software',
+];
+
+const LEARNING: string[] = [
+  'Arquitecturas RAG para IA',
+  'Despliegue y Contenedores (Docker)',
+  'Bases de datos vectoriales',
+  'Testing (Pruebas unitarias)',
+];
 
 export default function Home() {
   return (
     <main>
       
-      {/* ================== */}
-      {/* Sección Hero (Sobre Mí) - VERSIÓN ACTUALIZADA */}
-      {/* ================== */}
+      {/* ================================== */}
+      {/* Sección HERO (SOBRE MÍ) - ARREGLADA */}
+      {/* ================================== */}
       <section 
         id="sobre-mi" 
-        className="min-h-screen flex items-center justify-center bg-zinc-900 text-white text-center p-4"
+        // CAMBIO 1: Volvemos a 'min-h-screen' y usamos el grisáceo 'bg-zinc-800'
+        className="min-h-screen bg-zinc-800 text-white flex flex-col justify-center items-center text-center px-4"
       >
-        <div className="max-w-3xl"> {/* Añadimos un max-width para que el texto no sea tan ancho */}
+        
+        {/* CAMBIO 2: Título más pequeño */}
+        <h1 className="text-5xl md:text-6xl font-bold mb-3">
+          Tomás Escalante
+        </h1>
+        
+        {/* CAMBIO 3: Subtítulo más pequeño y menos margen */}
+        <h2 className="text-xl md:text-2xl font-light text-sky-400 mb-5">
+          Estudiante de Ingeniería en Informática y Ciencia de Datos
+        </h2>
 
-          {/* Tu foto (opcional, la dejaremos comentada) */}
-          {/* <Image src="/mi-foto.jpg" alt="Tomás Escalante" width={150} height={150} className="rounded-full mx-auto mb-6" /> */}
-
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            Tomás Escalante
-          </h1>
-          <p className="text-xl md:text-2xl text-sky-400 mb-8">
-            Estudiante de Ingeniería en Informática & Data Science
-          </p>
-          
-          {/* ================== */}
-          {/* NUEVO PÁRRAFO */}
-          {/* ================== */}
-          <p className="text-lg text-zinc-300 max-w-2xl mx-auto mb-8">
-            Soy un desarrollador en formación apasionado por la tecnología y la resolución de problemas. 
-            Me gusta la programación, como la idea de armar un "puzzle" con el código y disfruto tanto del frontend como del backend.
-            tercer año de Ingeniería Informática en DuocUC.
-            Actualmente estoy especializándome en Ciencia de Datos para modelar e integrar Inteligencia Artificial en mis proyectos.
-          </p>
-
-          {/* ================== */}
-          {/* NUEVOS ENLACES SOCIALES */}
-          {/* ================== */}
-          <div className="flex justify-center gap-x-6 mb-10">
-            <Link 
-              href="https://github.com/tomiloki" // <-- ¡Tu GitHub!
-              target="_blank" // Para que abra en una pestaña nueva
-              rel="noopener noreferrer"
-              className="text-zinc-400 hover:text-white transition-colors"
-              aria-label="GitHub de Tomás"
-            >
-              <FaGithub size={32} />
-            </Link>
-            <Link 
-              href="https://www.linkedin.com/in/tu-usuario/" // <-- ¡Crea tu LinkedIn y ponlo aquí!
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-zinc-400 hover:text-sky-500 transition-colors"
-              aria-label="LinkedIn de Tomás"
-            >
-              <FaLinkedin size={32} />
-            </Link>
-          </div>
-          
-          {/* Botón CTA (se mantiene) */}
-          <Link 
-            href="#proyectos"
-            className="bg-sky-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-600 transition-colors duration-300"
+        {/* CAMBIO 4: Párrafos más pequeños y menos margen */}
+        <p className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto mb-3">
+          Soy un desarrollador en formación apasionado por la tecnología y la resolución de problemas. Me gusta la programación, como la idea de armar un "puzzle" con el código, y disfruto tanto del frontend como del backend.
+        </p>
+        <p className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto">
+          Tercer año de Ingeniería Informática en DuocUC, actualmente especializándome en Ciencia de Datos para modelar e integrar Inteligencia Artificial en mis proyectos.
+        </p>
+        
+        {/* CAMBIO 5: Menos margen sobre los íconos */}
+        <nav className="flex justify-center space-x-6 mt-6" aria-label="Redes sociales">
+          <a 
+            href="https://github.com/tu-usuario" // <-- corrige 'httpsg'
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-white transition-colors"
+            aria-label="GitHub"
           >
-            Ver mis Proyectos
-          </Link>
-        </div>
+            <Github className="h-7 w-7" />
+          </a>
+          <a 
+            href="https://linkedin.com/in/tu-usuario" // <-- corrige 'httpsg'
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-white transition-colors"
+            aria-label="LinkedIn"
+          >
+            <Linkedin className="h-7 w-7" />
+          </a>
+        </nav>
+
+        {/* CAMBIO 6: Menos margen sobre el botón */}
+        <a 
+          href="#proyectos" 
+          className="mt-8 inline-block bg-blue-500 text-white font-bold py-3 px-6 rounded-lg text-lg hover:bg-blue-600 transition-colors duration-300"
+        >
+          Ver mis Proyectos
+        </a>
       </section>
 
       {/* ================================== */}
@@ -89,43 +106,57 @@ export default function Home() {
             <div className="bg-zinc-900 p-6 rounded-lg shadow-lg">
               {/* <FaBrain className="text-4xl text-sky-400 mb-4" /> */}
               <h3 className="text-2xl font-bold mb-4">Habilidades Blandas</h3>
-              <ul className="list-disc list-inside space-y-2 text-zinc-300">
-                <li>Resolución de Problemas</li>
-                <li>Documentación Técnica</li>
-                <li>Comunicación Efectiva</li>
-                <li>Adaptabilidad y Aprendizaje Rápido</li>
-                <li>Trabajo en equipo</li>
+              
+              {/* === CÓDIGO ACTUALIZADO AQUÍ === */}
+              <ul className="space-y-3 text-zinc-300">
+                {SOFT_SKILLS.map(item => (
+                  <li key={item} className="flex items-center">
+                    <ChevronRight className="h-5 w-5 text-sky-400 mr-2 shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
               </ul>
+              {/* === FIN DE LA ACTUALIZACIÓN === */}
             </div>
 
             {/* Columna 2: Intereses Principales */}
             <div className="bg-zinc-900 p-6 rounded-lg shadow-lg">
               {/* <FaRocket className="text-4xl text-sky-400 mb-4" /> */}
               <h3 className="text-2xl font-bold mb-4">Intereses Principales</h3>
-              <p className="text-zinc-300 mb-2">
-                Me apasiona la intersección entre el desarrollo de software y la inteligencia artificial.
+              <p className="text-zinc-300 mb-4">
+                Me apasiona todo lo que tiene que ver con el desarrollo de software y la inteligencia artificial.
               </p>
-              <ul className="list-disc list-inside space-y-2 text-zinc-300">
-                <li>Desarrollo Full-Stack (Web)</li>
-                <li>Machine Learning & IA</li>
-                <li>Automatización de Procesos</li>
-                <li>Arquitectura de Software</li>
+              
+              {/* === CÓDIGO ACTUALIZADO AQUÍ === */}
+              <ul className="space-y-3 text-zinc-300">
+                {INTERESTS.map(item => (
+                  <li key={item} className="flex items-center">
+                    <ChevronRight className="h-5 w-5 text-sky-400 mr-2 shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
               </ul>
+              {/* === FIN DE LA ACTUALIZACIÓN === */}
             </div>
 
             {/* Columna 3: Aprendiendo Actualmente */}
             <div className="bg-zinc-900 p-6 rounded-lg shadow-lg">
               {/* <FaBook className="text-4xl text-sky-400 mb-4" /> */}
               <h3 className="text-2xl font-bold mb-4">Aprendiendo</h3>
-              <p className="text-zinc-300 mb-2">
+              <p className="text-zinc-300 mb-4">
                 Siempre estoy buscando expandir mi stack. Actualmente estoy enfocado en:
               </p>
-              <ul className="list-disc list-inside space-y-2 text-zinc-300">
-                <li>Arquitecturas RAG para IA</li>
-                <li>Despliegue y Contenedores (Docker)</li>
-                <li>Bases de datos vectoriales</li>
-                <li>Testing (Pruebas unitarias)</li>
+              
+              {/* === CÓDIGO ACTUALIZADO AQUÍ === */}
+              <ul className="space-y-3 text-zinc-300">
+                {LEARNING.map(item => (
+                  <li key={item} className="flex items-center">
+                    <ChevronRight className="h-5 w-5 text-sky-400 mr-2 shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
               </ul>
+              {/* === FIN DE LA ACTUALIZACIÓN === */}
             </div>
 
           </div>
@@ -172,6 +203,61 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* --- SECCIÓN DE CONTACTO --- */}
+
+      <section id="contacto" className="bg-zinc-800 text-white py-20 md:py-32 text-center">
+        <div className="container mx-auto px-4">
+          
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Hablemos
+          </h2>
+          
+          <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-8">
+            Actualmente estoy abierto a nuevas oportunidades y colaboraciones.
+            Si tienes un proyecto en mente o simplemente quieres conectar, 
+            no dudes en enviarme un mensaje.
+          </p>
+
+          {/* Botón de email con correo e ícono */}
+          <a 
+            href="mailto:tomiescalantte@gmail.com"
+            className="inline-flex items-center justify-center bg-blue-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-blue-600 transition-colors duration-300"
+          >
+            <Mail className="h-5 w-5 mr-2" />
+            Enviar un Correo
+          </a>
+
+          {/* Iconos sociales con enlaces reales */}
+          <nav className="flex justify-center space-x-8 mt-12" aria-label="Redes sociales">
+            <a 
+              href="https://github.com/tu-usuario"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+              aria-label="GitHub"
+            >
+              <Github className="h-8 w-8" />
+            </a>
+            <a 
+              href="https://linkedin.com/in/tu-usuario"
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="h-8 w-8" />
+            </a>
+          </nav>
+
+        </div>
+      </section>
+
+{/* --- FIN SECCIÓN DE CONTACTO --- */}
+
+      {/* --- FIN SECCIÓN DE CONTACTO --- */}
+
+      {/* Aquí vendría tu <Footer /> */}
 
     </main>
   );
