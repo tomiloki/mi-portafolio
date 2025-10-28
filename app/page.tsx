@@ -181,7 +181,7 @@ export default function Home() {
               description="Mi portafolio web personal donde muestro mis habilidades y proyectos. ¡El mismo que estás viendo ahora!"
               tags={['Next.js', 'React', 'Tailwind CSS', 'TypeScript']}
               linkRepo="https://github.com/tomiloki/mi-portafolio"
-              linkDeploy="https://mi-portafolio-tomiloki.vercel.app/" // <-- ¡TU FUTURA URL DE VERCEL!
+              linkDeploy="https://mi-portafolio-2ws7o01gl-tomilokis-projects.vercel.app/" // <-- ¡TU FUTURA URL DE VERCEL!
             />
 
             {/* Proyecto 2: (Placeholder) */}

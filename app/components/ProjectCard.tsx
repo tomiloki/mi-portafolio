@@ -22,9 +22,9 @@ export default function ProjectCard({ title, description, tags, linkRepo, linkDe
       {/* <img src="/ruta/a/la-imagen.jpg" alt={title} className="w-full h-48 object-cover" /> */}
       
       {/* Contenido de texto */}
-      <div className="p-6 flex flex-col flex-grow">
+      <div className="p-6 flex flex-col grow">
         <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
-        <p className="text-zinc-300 mb-4 flex-grow">{description}</p>
+        <p className="text-zinc-300 mb-4 grow">{description}</p>
 
         {/* 3. Mapeo de las "píldoras" de tecnología */}
         <div className="flex flex-wrap gap-2 mb-6">
