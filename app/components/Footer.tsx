@@ -1,34 +1,41 @@
-// app/components/Footer.tsx
-import Link from "next/link";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-
 export default function Footer() {
   return (
-    <footer className="bg-zinc-900 text-zinc-400 p-8 text-center">
-      <div className="flex justify-center gap-x-6 mb-4">
-        <Link 
-          href="https://github.com/tomiloki" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="hover:text-white transition-colors"
-          aria-label="GitHub"
-        >
-          <FaGithub size={28} />
-        </Link>
-        <Link 
-          href="https://www.linkedin.com/in/tu-usuario/" // <-- ¡Recuerda cambiar esto!
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="hover:text-sky-500 transition-colors" // <-- Aquí está nuestro color de acento
-          aria-label="LinkedIn"
-        >
-          <FaLinkedin size={28} />
-        </Link>
+    <footer className="site-footer">
+      <div className="site-footer-inner">
+        <div>
+          <p className="footer-title">Tomás Escalante</p>
+          <p className="footer-copy">
+            Desarrollador Full Stack: web front y back, integración de APIs y
+            gestión de servidores. Próximo a titularme de Ingeniería en
+            Informática (Duoc UC).
+          </p>
+        </div>
+
+        <div className="footer-links">
+          <a href="mailto:tomiescalantte@gmail.com">tomiescalantte@gmail.com</a>
+          <a
+            href="https://github.com/tomiloki"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            github.com/tomiloki
+          </a>
+          <a
+            href="https://www.linkedin.com/in/tomas-escalante-o/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            linkedin.com/in/tomas-escalante-o
+          </a>
+          <a
+            href="https://veterinaria-movil.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Demo MascotaFeliz ↗
+          </a>
+        </div>
       </div>
-      <p>&copy; {new Date().getFullYear()} Tomás Escalante. Todos los derechos reservados.</p>
-      <p className="text-sm mt-2">
-        Hecho con <span className="text-sky-400">Next.js</span> y <span className="text-sky-400">Tailwind CSS</span>
-      </p>
     </footer>
   );
 }

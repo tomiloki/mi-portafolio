@@ -1,7 +1,862 @@
-/* app/globals.css */
+@import "tailwindcss";
+
+/* ========================================================================== 
+   01. Design tokens
+   ========================================================================== */
+:root {
+  --background: #0d1014;
+  --surface: #151b23;
+  --surface-2: #1b232d;
+  --text: #eef1f6;
+  --muted: #9ca7b6;
+  --muted-soft: #7f8a99;
+  --line: rgba(140, 150, 166, 0.16);
+  --line-strong: rgba(140, 150, 166, 0.3);
+  --edge: rgba(255, 255, 255, 0.045);
+  --accent: #4f97cf;
+  --accent-hover: #6aa9db;
+  --accent-dim: rgba(79, 151, 207, 0.12);
+  --accent-line: rgba(79, 151, 207, 0.42);
+
+  --font-body: var(--font-manrope);
+  --font-display: var(--font-space-grotesk);
+
+  --r-1: 6px;
+  --r-2: 10px;
+  --r-3: 16px;
+  --r-full: 999px;
+  --radius: var(--r-3);
+  --radius-sm: var(--r-2);
+
+  --shadow-card: 0 1px 0 var(--edge) inset, 0 2px 10px rgba(0, 0, 0, 0.22);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 2rem;
+  --space-8: 2.5rem;
+  --space-9: 3rem;
+  --space-10: 4rem;
+  --space-11: 5rem;
+}
+
+/* ========================================================================== 
+   02. Base
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+}
 
 html {
   scroll-behavior: smooth;
 }
 
-@import "tailwindcss";
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-body), sans-serif;
+  font-size: 16.5px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--accent-dim);
+  color: var(--text);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ========================================================================== 
+   03. Layout primitives
+   ========================================================================== */
+.portfolio-shell {
+  padding-bottom: 1rem;
+}
+
+.site-nav-inner,
+.site-footer-inner,
+.hero-content,
+.section-block {
+  width: min(1100px, calc(100% - 2.5rem));
+  margin: 0 auto;
+}
+
+.section-block {
+  padding: var(--space-11) 0;
+  border-top: 1px solid var(--line);
+}
+
+.split-layout {
+  display: grid;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.split-layout--about {
+  grid-template-columns: minmax(0, 1.32fr) minmax(250px, 0.72fr);
+}
+
+.split-layout--contact {
+  grid-template-columns: minmax(0, 1.12fr) minmax(260px, 0.82fr);
+}
+
+.section-copy-column {
+  max-width: 46rem;
+}
+
+.copy-stack {
+  display: grid;
+  gap: var(--space-5);
+  align-content: start;
+}
+
+.content-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+/* ========================================================================== 
+   04. Typography and reusable content
+   ========================================================================== */
+.hero-copy h1,
+.section-heading h2,
+.project-body h3,
+.detail-card h3 {
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+.hero-kicker,
+.section-kicker,
+.list-title {
+  font-family: var(--font-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.hero-summary,
+.about-story p,
+.detail-card p,
+.contact-copy p,
+.project-desc,
+.section-note,
+.footer-copy {
+  color: var(--muted);
+}
+
+.section-heading {
+  max-width: 54rem;
+  margin-bottom: var(--space-8);
+}
+
+.section-heading--compact {
+  max-width: 42rem;
+  margin-bottom: var(--space-5);
+}
+
+.section-heading h2 {
+  margin: var(--space-3) 0 0;
+  font-size: clamp(2rem, 3.6vw, 2.9rem);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+
+.section-note {
+  margin: var(--space-3) 0 0;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  max-width: 46rem;
+}
+
+.bullet-list {
+  margin: var(--space-7) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.bullet-list li {
+  position: relative;
+  padding-left: 1.2rem;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.bullet-list li::before {
+  content: "";
+  position: absolute;
+  top: 0.58rem;
+  left: 0;
+  width: 0.36rem;
+  height: 0.36rem;
+  border-radius: 1px;
+  background: var(--accent);
+}
+
+.chip-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.62rem;
+  border-radius: var(--r-1);
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8rem;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+
+.chip:hover {
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+
+/* ========================================================================== 
+   05. Navigation
+   ========================================================================== */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(14px);
+  background: rgba(14, 17, 22, 0.74);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-nav-inner {
+  min-height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+  font-size: 1.02rem;
+  letter-spacing: -0.02em;
+}
+
+.brand-mark span {
+  display: block;
+}
+
+.brand-mark small {
+  display: block;
+  margin-top: 0.12rem;
+  color: var(--muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.brand-mark-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.site-nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.site-nav-links a {
+  transition: color 160ms ease;
+}
+
+.site-nav-links a:hover,
+.footer-links a:hover {
+  color: var(--text);
+}
+
+.nav-link-subtle:hover {
+  color: var(--accent);
+}
+
+/* ========================================================================== 
+   06. Actions
+   ========================================================================== */
+.nav-cta,
+.button-primary,
+.button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  min-height: 44px;
+  padding: 0 var(--space-5);
+  font-size: 0.94rem;
+  font-weight: 600;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.nav-cta,
+.button-primary {
+  background: var(--accent);
+  color: #0e1116;
+  border: 1px solid var(--accent);
+}
+
+.nav-cta:hover,
+.button-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.button-secondary {
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  background: transparent;
+}
+
+.button-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ========================================================================== 
+   07. Hero
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  padding: var(--space-11) 0;
+}
+
+.hero-content {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(310px, 0.85fr);
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.hero-copy-enter,
+.hero-panel {
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-panel {
+  animation-delay: 0.1s;
+}
+
+.hero-copy h1 {
+  margin: var(--space-5) 0 var(--space-6);
+  font-size: clamp(2.9rem, 6vw, 4.9rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  max-width: 15ch;
+}
+
+.hero-summary {
+  max-width: 40rem;
+  font-size: 1.16rem;
+  line-height: 1.7;
+}
+
+.hero-actions,
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-7);
+}
+
+.hero-meta {
+  margin: var(--space-6) 0 0;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8rem;
+  color: var(--muted-soft);
+  letter-spacing: 0.02em;
+}
+
+.spec-card {
+  padding: var(--space-6);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.88rem;
+  line-height: 1.9;
+}
+
+.spec-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.spec-k {
+  color: var(--accent);
+  min-width: 5rem;
+  flex-shrink: 0;
+}
+
+.spec-v {
+  color: var(--text);
+}
+
+.spec-sep {
+  height: 1px;
+  background: var(--line);
+  margin: 0.9rem 0;
+}
+
+.spec-caret {
+  display: inline-block;
+  width: 0.5rem;
+  height: 1rem;
+  margin-top: 0.9rem;
+  background: var(--accent);
+  vertical-align: text-bottom;
+  animation: blink 1.05s step-end infinite;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ========================================================================== 
+   08. About
+   ========================================================================== */
+.about-story p,
+.contact-copy p {
+  line-height: 1.75;
+  margin: 0;
+  font-size: 1.06rem;
+}
+
+.about-card {
+  padding: var(--space-6);
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  grid-template-areas:
+    "photo identity"
+    "strengths strengths";
+  gap: var(--space-5);
+  align-items: center;
+}
+
+.about-photo {
+  grid-area: photo;
+  width: 100%;
+  max-width: 96px;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius);
+  object-fit: cover;
+  object-position: center 20%;
+  border: 1px solid var(--line-strong);
+}
+
+.about-identity {
+  grid-area: identity;
+}
+
+.about-identity p {
+  margin: 0;
+}
+
+.about-identity .id-name {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.about-identity .id-meta {
+  margin-top: 0.25rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.statement-box {
+  padding: var(--space-5) var(--space-6);
+  border-left: 2px solid var(--accent);
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.about-card > div:last-child {
+  grid-area: strengths;
+}
+
+.about-card .bullet-list {
+  margin-top: 0;
+}
+
+.list-title {
+  margin: 0 0 0.8rem;
+}
+
+/* ========================================================================== 
+   09. Experience
+   ========================================================================== */
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.detail-card {
+  padding: var(--space-6);
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+  transition: border-color 180ms ease;
+}
+
+.detail-card:hover {
+  border-color: var(--line-strong);
+}
+
+.detail-card h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.detail-period {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.78rem;
+  color: var(--muted-soft);
+  margin: 0;
+}
+
+.detail-card .bullet-list {
+  margin: 0.25rem 0 0;
+}
+
+.detail-card .chip-cloud {
+  margin-top: 0.4rem;
+}
+
+/* ========================================================================== 
+   10. Projects
+   ========================================================================== */
+.project-stack {
+  display: grid;
+  gap: var(--space-7);
+}
+
+.project-card {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
+  transition: border-color 180ms ease;
+}
+
+.project-card:hover {
+  border-color: var(--line-strong);
+}
+
+.project-media {
+  background: var(--surface-2);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+}
+
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.sb-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: var(--r-full);
+  background: var(--line-strong);
+}
+
+.sb-url {
+  margin-left: 0.55rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono), monospace;
+  color: var(--muted-soft);
+}
+
+.project-shot {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.1rem;
+}
+
+.shot-img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  display: block;
+  border-radius: var(--r-1);
+  border: 1px solid var(--line);
+}
+
+.project-body {
+  padding: var(--space-6);
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.badge {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.26rem 0.58rem;
+  border-radius: var(--r-1);
+  border: 1px solid var(--line-strong);
+  color: var(--muted);
+}
+
+.badge-academic {
+  color: var(--accent);
+  border-color: var(--accent-line);
+  background: var(--accent-dim);
+}
+
+.project-body h3 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+}
+
+.project-desc {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.project-body .bullet-list {
+  margin: 0.3rem 0 0;
+}
+
+.project-actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-top: var(--space-2);
+}
+
+/* ========================================================================== 
+   11. Contact
+   ========================================================================== */
+.contact-panel {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  font-family: var(--font-mono), monospace;
+}
+
+.contact-panel span {
+  display: block;
+  color: var(--accent);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.contact-panel strong {
+  display: block;
+  margin: 0.3rem 0 0;
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* ========================================================================== 
+   12. Footer
+   ========================================================================== */
+.site-footer {
+  border-top: 1px solid var(--line);
+  background: var(--background);
+}
+
+.site-footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding: var(--space-8) 0 var(--space-9);
+}
+
+.footer-title {
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+
+.footer-copy {
+  margin: 0.5rem 0 0;
+  max-width: 34rem;
+  line-height: 1.6;
+  font-size: 0.94rem;
+}
+
+.footer-links {
+  display: grid;
+  gap: 0.5rem;
+  text-align: right;
+  color: var(--muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.88rem;
+}
+
+/* ========================================================================== 
+   13. Responsive
+   ========================================================================== */
+@media (max-width: 960px) {
+  .hero-content,
+  .split-layout,
+  .project-card,
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content,
+  .split-layout {
+    gap: var(--space-7);
+  }
+
+  .project-media {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .shot-img {
+    max-height: 340px;
+  }
+
+  .about-card {
+    max-width: 420px;
+  }
+
+  .site-footer-inner {
+    flex-direction: column;
+  }
+
+  .footer-links {
+    text-align: left;
+  }
+}
+
+@media (max-width: 820px) {
+  .site-nav-inner {
+    flex-wrap: wrap;
+    padding: 0.75rem 0;
+  }
+
+  .site-nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 1.2rem;
+    font-size: 0.88rem;
+  }
+
+  .section-block {
+    padding: 3.75rem 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-nav-inner,
+  .site-footer-inner,
+  .hero-content,
+  .section-block {
+    width: min(100% - 1.6rem, 1100px);
+  }
+
+  .hero-section {
+    padding: 2.75rem 0 2.5rem;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.4rem, 12vw, 3.4rem);
+  }
+
+  .site-nav-links {
+    overflow-x: auto;
+    padding-bottom: 0.15rem;
+  }
+
+  .project-body,
+  .project-shot {
+    padding: 1.3rem;
+  }
+}
+
+/* ========================================================================== 
+   14. Reduced motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

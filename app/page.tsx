@@ -1,264 +1,296 @@
-// app/page.tsx
-import ProjectCard from './components/ProjectCard';
-import { ChevronRight, Github, Linkedin, Mail } from 'lucide-react';
+import Image from "next/image";
+import ProjectSpotlight from "./components/ProjectSpotlight";
+import { AnimatedSection } from "./components/AnimatedSection";
 
-// Listas para evitar repetición
-const SOFT_SKILLS: string[] = [
-  'Resolución de Problemas',
-  'Documentación Técnica',
-  'Comunicación Efectiva',
-  'Adaptabilidad y Aprendizaje Rápido',
-  'Trabajo en equipo',
+const CORE_STRENGTHS = [
+  "Frontend y backend web, con integración de APIs.",
+  "Servidores con Docker, migraciones y backups.",
+  "Orden, documentación y aprendizaje rápido.",
 ];
 
-const INTERESTS: string[] = [
-  'Desarrollo Full-Stack (Web)',
-  'Machine Learning & IA',
-  'Automatización de Procesos',
-  'Arquitectura de Software',
-];
-
-const LEARNING: string[] = [
-  'Arquitecturas RAG para IA',
-  'Despliegue y Contenedores (Docker)',
-  'Bases de datos vectoriales',
-  'Testing (Pruebas unitarias)',
+const EXPERIENCE = [
+  {
+    role: "Desarrollador Full Stack — LeveraWeb",
+    period: "Mayo 2026 — actualidad",
+    points: [
+      "Desarrollo y mantención de sitios web en producción, principalmente sobre WordPress.",
+      "Gestión de servidores con Docker: despliegue, mantención y estabilidad de los entornos.",
+      "Migraciones y políticas de backup, incluyendo respaldos en Cloudflare R2.",
+    ],
+    tech: ["WordPress", "Docker", "Cloudflare R2", "Git"],
+  },
+  {
+    role: "Desarrollador — Livio (proyecto propio)",
+    period: "2025 · SaaS logístico B2B, etapa MVP",
+    points: [
+      "Programé la app de un SaaS logístico B2B: backend en Laravel con autenticación y multi-tenant.",
+      "Alcanzó etapa MVP pero no llegó a producción; me sirvió para construir una aplicación de cero y tomar decisiones técnicas.",
+    ],
+    tech: ["Laravel", "PHP", "JWT", "REST"],
+  },
 ];
 
 export default function Home() {
   return (
-    <main>
-      
-      {/* ================================== */}
-      {/* Sección HERO (SOBRE MÍ) - ARREGLADA */}
-      {/* ================================== */}
-      <section 
-        id="sobre-mi" 
-        // CAMBIO 1: Volvemos a 'min-h-screen' y usamos el grisáceo 'bg-zinc-800'
-        className="min-h-screen bg-zinc-800 text-white flex flex-col justify-center items-center text-center px-4"
-      >
-        
-        {/* CAMBIO 2: Título más pequeño */}
-        <h1 className="text-5xl md:text-6xl font-bold mb-3">
-          Tomás Escalante
-        </h1>
-        
-        {/* CAMBIO 3: Subtítulo más pequeño y menos margen */}
-        <h2 className="text-xl md:text-2xl font-light text-sky-400 mb-5">
-          Estudiante de Ingeniería en Informática y Ciencia de Datos
-        </h2>
+    <main className="portfolio-shell">
 
-        {/* CAMBIO 4: Párrafos más pequeños y menos margen */}
-        <p className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto mb-3">
-          Soy un desarrollador en formación apasionado por la tecnología y la resolución de problemas. Me gusta la programación, como la idea de armar un "puzzle" con el código, y disfruto tanto del frontend como del backend.
-        </p>
-        <p className="text-base md:text-lg text-gray-300 max-w-2xl mx-auto">
-          Tercer año de Ingeniería Informática en DuocUC, actualmente especializándome en Ciencia de Datos para modelar e integrar Inteligencia Artificial en mis proyectos.
-        </p>
-        
-        {/* CAMBIO 5: Menos margen sobre los íconos */}
-        <nav className="flex justify-center space-x-6 mt-6" aria-label="Redes sociales">
-          <a 
-            href="https://github.com/tu-usuario" // <-- corrige 'httpsg'
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white transition-colors"
-            aria-label="GitHub"
-          >
-            <Github className="h-7 w-7" />
-          </a>
-          <a 
-            href="https://linkedin.com/in/tu-usuario" // <-- corrige 'httpsg'
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white transition-colors"
-            aria-label="LinkedIn"
-          >
-            <Linkedin className="h-7 w-7" />
-          </a>
-        </nav>
+      {/* ── HERO ─────────────────────────────────────────── */}
+      <section id="inicio" className="hero-section">
+        <div className="hero-content">
+          <div className="hero-copy hero-copy-enter">
+            <p className="hero-kicker">Tomás Escalante · Full Stack · Ing. Informática</p>
+            <h1>
+              Desarrollo aplicaciones web,
+              <br />front y back.
+            </h1>
+            <p className="hero-summary">
+              Trabajo sobre sitios en producción y me manejo en el ciclo completo:
+              web front y back, integración de APIs y gestión de servidores con
+              Docker, migraciones y backups.
+            </p>
 
-        {/* CAMBIO 6: Menos margen sobre el botón */}
-        <a 
-          href="#proyectos" 
-          className="mt-8 inline-block bg-blue-500 text-white font-bold py-3 px-6 rounded-lg text-lg hover:bg-blue-600 transition-colors duration-300"
-        >
-          Ver mis Proyectos
-        </a>
-      </section>
-
-      {/* ================================== */}
-      {/* Sección Habilidades e Intereses (NUEVA VERSIÓN) */}
-      {/* ================================== */}
-      <section 
-        id="habilidades-e-intereses" // <-- ID actualizado
-        className="min-h-screen bg-zinc-800 text-white p-8 md:p-16" // Fondo un poco más claro
-      >
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Habilidades e Intereses
-          </h2>
-          
-          {/* Usamos un grid de 3 columnas para organizar */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-
-            {/* Columna 1: Habilidades Blandas */}
-            <div className="bg-zinc-900 p-6 rounded-lg shadow-lg">
-              {/* <FaBrain className="text-4xl text-sky-400 mb-4" /> */}
-              <h3 className="text-2xl font-bold mb-4">Habilidades Blandas</h3>
-              
-              {/* === CÓDIGO ACTUALIZADO AQUÍ === */}
-              <ul className="space-y-3 text-zinc-300">
-                {SOFT_SKILLS.map(item => (
-                  <li key={item} className="flex items-center">
-                    <ChevronRight className="h-5 w-5 text-sky-400 mr-2 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              {/* === FIN DE LA ACTUALIZACIÓN === */}
+            <div className="hero-actions">
+              <a href="#proyectos" className="button-primary">
+                Ver proyectos
+              </a>
+              <a
+                href="https://github.com/tomiloki"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button-secondary"
+              >
+                GitHub
+              </a>
             </div>
 
-            {/* Columna 2: Intereses Principales */}
-            <div className="bg-zinc-900 p-6 rounded-lg shadow-lg">
-              {/* <FaRocket className="text-4xl text-sky-400 mb-4" /> */}
-              <h3 className="text-2xl font-bold mb-4">Intereses Principales</h3>
-              <p className="text-zinc-300 mb-4">
-                Me apasiona todo lo que tiene que ver con el desarrollo de software y la inteligencia artificial.
-              </p>
-              
-              {/* === CÓDIGO ACTUALIZADO AQUÍ === */}
-              <ul className="space-y-3 text-zinc-300">
-                {INTERESTS.map(item => (
-                  <li key={item} className="flex items-center">
-                    <ChevronRight className="h-5 w-5 text-sky-400 mr-2 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              {/* === FIN DE LA ACTUALIZACIÓN === */}
-            </div>
-
-            {/* Columna 3: Aprendiendo Actualmente */}
-            <div className="bg-zinc-900 p-6 rounded-lg shadow-lg">
-              {/* <FaBook className="text-4xl text-sky-400 mb-4" /> */}
-              <h3 className="text-2xl font-bold mb-4">Aprendiendo</h3>
-              <p className="text-zinc-300 mb-4">
-                Siempre estoy buscando expandir mi stack. Actualmente estoy enfocado en:
-              </p>
-              
-              {/* === CÓDIGO ACTUALIZADO AQUÍ === */}
-              <ul className="space-y-3 text-zinc-300">
-                {LEARNING.map(item => (
-                  <li key={item} className="flex items-center">
-                    <ChevronRight className="h-5 w-5 text-sky-400 mr-2 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              {/* === FIN DE LA ACTUALIZACIÓN === */}
-            </div>
-
+            <p className="hero-meta">
+              Santiago, Chile · Ingeniería en Informática (Duoc UC)
+            </p>
           </div>
+
+          <aside className="hero-panel">
+            <div className="spec-card content-card">
+              <div className="spec-row">
+                <span className="spec-k">rol</span>
+                <span className="spec-v">Desarrollador Full Stack</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-k">base</span>
+                <span className="spec-v">Santiago, Chile</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-k">estudia</span>
+                <span className="spec-v">Ing. Informática · Duoc UC</span>
+              </div>
+              <div className="spec-sep" />
+              <div className="spec-row">
+                <span className="spec-k">trabajo</span>
+                <span className="spec-v">LeveraWeb · 2026—</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-k">foco</span>
+                <span className="spec-v">backend · APIs · servidores</span>
+              </div>
+              <div className="spec-row">
+                <span className="spec-k">stack</span>
+                <span className="spec-v">docker · laravel · django · react · postgres</span>
+              </div>
+              <span className="spec-caret" aria-hidden="true" />
+            </div>
+          </aside>
         </div>
       </section>
 
-      {/* ================== */}
-      {/* Sección Proyectos (VERSIÓN ACTUALIZADA) */}
-      {/* ================== */}
-      <section id="proyectos" className="min-h-screen bg-zinc-900 p-8 md:p-16">
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
-            Proyectos
-          </h2>
-          
-          {/* Grilla de Proyectos */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            {/* Proyecto 1: Este mismo Portafolio */}
-            <ProjectCard
-              title="Portafolio Personal"
-              description="Mi portafolio web personal donde muestro mis habilidades y proyectos. ¡El mismo que estás viendo ahora!"
-              tags={['Next.js', 'React', 'Tailwind CSS', 'TypeScript']}
-              linkRepo="https://github.com/tomiloki/mi-portafolio"
-              linkDeploy="https://mi-portafolio-2ws7o01gl-tomilokis-projects.vercel.app/" // <-- ¡TU FUTURA URL DE VERCEL!
-            />
+      {/* ── SOBRE MÍ ─────────────────────────────────────── */}
+      <section id="sobre-mi" className="section-block">
+        <AnimatedSection>
+          <div className="split-layout split-layout--about">
+            <div className="section-copy-column">
+              <div className="section-heading section-heading--compact">
+                <p className="section-kicker">Sobre mí</p>
+                <h2>Perfil y trabajo actual.</h2>
+              </div>
 
-            {/* Proyecto 2: (Placeholder) */}
-            <ProjectCard
-              title="Próximo Proyecto (Ej: CRUD)"
-              description="Un gestor de tareas o blog con autenticación, API REST y base de datos."
-              tags={['React', 'Node.js', 'PostgreSQL', 'JWT']}
-              linkRepo="#" // Pones '#' si aún no tienes el link
-            />
+              <article className="about-story copy-stack">
+                <p>
+                  Estudio Ingeniería en Informática y trabajo como desarrollador
+                  full-stack. Me interesa entender el sistema completo: datos,
+                  backend, frontend y entorno donde corre.
+                </p>
+                <p>
+                  Hoy trabajo en LeveraWeb con sitios en producción, servidores
+                  Docker, migraciones y backups. Antes construí Livio, un SaaS
+                  logístico B2B propio que llegó a etapa MVP.
+                </p>
+                <div className="statement-box content-card">
+                  <strong>
+                    Cuido el orden del código, la documentación y la trazabilidad de
+                    las decisiones.
+                  </strong>
+                </div>
+              </article>
+            </div>
 
-            {/* Proyecto 3: (Placeholder) */}
-            <ProjectCard
-              title="Próximo Proyecto (Ej: IA)"
-              description="Un asistente de IA o un modelo de predicción servido a través de una API."
-              tags={['Python', 'FastAPI', 'Scikit-learn', 'RAG']}
-              linkRepo="#"
-            />
-
+            <aside className="about-card content-card">
+              <Image
+                src="/foto.png"
+                alt="Tomás Escalante"
+                width={380}
+                height={380}
+                className="about-photo"
+                priority
+              />
+              <div className="about-identity">
+                <p className="id-name">Tomás Escalante</p>
+                <p className="id-meta">Full Stack · Santiago, Chile</p>
+              </div>
+              <div>
+                <p className="list-title">Fortalezas</p>
+                <ul className="bullet-list">
+                  {CORE_STRENGTHS.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </aside>
           </div>
-        </div>
+        </AnimatedSection>
       </section>
 
-      {/* --- SECCIÓN DE CONTACTO --- */}
+      {/* ── EXPERIENCIA ──────────────────────────────────── */}
+      <section id="experiencia" className="section-block">
+        <AnimatedSection>
+          <div className="section-heading">
+            <p className="section-kicker">Experiencia</p>
+            <h2>Dónde trabajo y qué hice.</h2>
+          </div>
 
-      <section id="contacto" className="bg-zinc-800 text-white py-20 md:py-32 text-center">
-        <div className="container mx-auto px-4">
-          
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Hablemos
-          </h2>
-          
-          <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-8">
-            Actualmente estoy abierto a nuevas oportunidades y colaboraciones.
-            Si tienes un proyecto en mente o simplemente quieres conectar, 
-            no dudes en enviarme un mensaje.
-          </p>
-
-          {/* Botón de email con correo e ícono */}
-          <a 
-            href="mailto:tomiescalantte@gmail.com"
-            className="inline-flex items-center justify-center bg-blue-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-blue-600 transition-colors duration-300"
-          >
-            <Mail className="h-5 w-5 mr-2" />
-            Enviar un Correo
-          </a>
-
-          {/* Iconos sociales con enlaces reales */}
-          <nav className="flex justify-center space-x-8 mt-12" aria-label="Redes sociales">
-            <a 
-              href="https://github.com/tu-usuario"
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
-              aria-label="GitHub"
-            >
-              <Github className="h-8 w-8" />
-            </a>
-            <a 
-              href="https://linkedin.com/in/tu-usuario"
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="h-8 w-8" />
-            </a>
-          </nav>
-
-        </div>
+          <div className="detail-grid">
+            {EXPERIENCE.map((item) => (
+              <article key={item.role} className="detail-card content-card">
+                <h3>{item.role}</h3>
+                <p className="detail-period">{item.period}</p>
+                <ul className="bullet-list">
+                  {item.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+                <div className="chip-cloud">
+                  {item.tech.map((t) => (
+                    <span key={t} className="chip">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </AnimatedSection>
       </section>
 
-{/* --- FIN SECCIÓN DE CONTACTO --- */}
+      {/* ── PROYECTOS ────────────────────────────────────── */}
+      <section id="proyectos" className="section-block">
+        <AnimatedSection>
+          <div className="section-heading">
+            <p className="section-kicker">Proyectos</p>
+            <h2>Dos proyectos full-stack que construí.</h2>
+            <p className="section-note">
+              Proyectos desarrollados durante mi formación. Son funcionales y
+              demuestran el stack de punta a punta, pero no están en producción.
+            </p>
+          </div>
 
-      {/* --- FIN SECCIÓN DE CONTACTO --- */}
+          <div className="project-stack">
+            <ProjectSpotlight
+              imageUrl="/screenshots/integracion-home.png"
+              title="E-commerce Automotriz"
+              tagline="E-commerce automotriz full-stack: catálogo B2C, canal mayorista B2B y panel de administración."
+              status="Demo local (Docker)"
+              repoUrl="https://github.com/tomiloki/Integracion"
+              stack={["Django", "DRF", "PostgreSQL", "React", "Docker", "JWT", "Webpay"]}
+              highlights={[
+                "Auth JWT con roles: cliente, distribuidor y admin.",
+                "Flujo carrito → orden → pago con Webpay (sandbox).",
+                "Backoffice de productos, órdenes, pagos y usuarios.",
+              ]}
+            />
 
-      {/* Aquí vendría tu <Footer /> */}
+            <ProjectSpotlight
+              imageUrl="/screenshots/mascotafeliz-home.png"
+              title="MascotaFeliz"
+              tagline="Plataforma veterinaria full-stack: reserva de horas, farmacia online y pagos, con demo pública."
+              status="Demo en vivo"
+              repoUrl="https://github.com/tomiloki/VeterinariaMovil"
+              liveUrl="https://veterinaria-movil.vercel.app"
+              stack={["Django", "DRF", "React", "Vite", "Render", "Vercel", "Webpay"]}
+              highlights={[
+                "Reserva de horas y perfiles de mascotas.",
+                "Farmacia online con catálogo, carrito y pagos.",
+                "Frontend en Vercel + backend en Render.",
+              ]}
+            />
+          </div>
+        </AnimatedSection>
+      </section>
 
+      {/* ── CONTACTO ─────────────────────────────────────── */}
+      <section id="contacto" className="section-block">
+        <AnimatedSection>
+          <div className="split-layout split-layout--contact">
+            <div className="section-copy-column contact-copy">
+              <div className="section-heading section-heading--compact">
+                <p className="section-kicker">Contacto</p>
+                <h2>Canales de contacto.</h2>
+              </div>
+
+              <p>
+                Email, GitHub y LinkedIn. El código y la demo pública están
+                disponibles para revisión.
+              </p>
+              <div className="contact-links">
+                <a href="mailto:tomiescalantte@gmail.com" className="button-primary">
+                  Escribirme
+                </a>
+                <a
+                  href="https://github.com/tomiloki"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button-secondary"
+                >
+                  GitHub
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/tomas-escalante-o/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button-secondary"
+                >
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+
+            <aside className="contact-panel content-card">
+              <div>
+                <span>Email</span>
+                <strong>tomiescalantte@gmail.com</strong>
+              </div>
+              <div>
+                <span>GitHub</span>
+                <strong>github.com/tomiloki</strong>
+              </div>
+              <div>
+                <span>LinkedIn</span>
+                <strong>linkedin.com/in/tomas-escalante-o</strong>
+              </div>
+              <div>
+                <span>Demo</span>
+                <strong>veterinaria-movil.vercel.app</strong>
+              </div>
+            </aside>
+          </div>
+        </AnimatedSection>
+      </section>
     </main>
   );
 }

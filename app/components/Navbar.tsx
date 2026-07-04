@@ -1,32 +1,49 @@
-// app/components/Nabvar.tsx
 import Link from "next/link";
 
+const NAV_ITEMS = [
+  { href: "#sobre-mi", label: "Sobre mí" },
+  { href: "#proyectos", label: "Proyectos" },
+  { href: "#experiencia", label: "Experiencia" },
+  { href: "#contacto", label: "Contacto" },
+];
+
 export default function Navbar() {
-    return (
-        <nav className="bg-zinc-900 text-white p-4">
-            <div className=" container mx-auto flex justify-between items-center">
-                {/* Tu Nombre (A la izquierda) */}
-                <Link href="/" className="text-xl font-bold">
-                    Mi Portafolio
-                </Link>
+  return (
+    <nav className="site-nav">
+      <div className="site-nav-inner">
+        <Link href="#inicio" className="brand-mark">
+          <span className="brand-mark-dot" />
+          <span>
+            Tomás Escalante
+            <small>Desarrollador Full Stack</small>
+          </span>
+        </Link>
 
-                {/* Links (a la derecha) */}
-                <div className="flex gap-x-6">
-                    <Link href="#inicio" className="hover:text-sky-400 transition-colors">
-                        Inicio
-                    </Link>
-                    
-                    {/* CAMBIO AQUÍ */}
-                    <Link href="#habilidades-e-intereses" className="hover:text-sky-400 transition-colors">
-                        Intereses
-                    </Link>
-                    {/* FIN DEL CAMBIO */}
+        <div className="site-nav-links">
+          {NAV_ITEMS.map((item) => (
+            <Link key={item.href} href={item.href}>
+              {item.label}
+            </Link>
+          ))}
+          <a
+            href="https://www.linkedin.com/in/tomas-escalante-o/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-link-subtle"
+          >
+            LinkedIn
+          </a>
+        </div>
 
-                    <Link href="#proyectos" className="hover:text-sky-400 transition-colors">
-                        Proyectos
-                    </Link>
-                </div>
-            </div>
-        </nav>
-    )
+        <a
+          href="https://github.com/tomiloki"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="nav-cta"
+        >
+          GitHub
+        </a>
+      </div>
+    </nav>
+  );
 }
