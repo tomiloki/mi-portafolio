@@ -18,9 +18,6 @@
   --accent-dim: rgba(79, 151, 207, 0.12);
   --accent-line: rgba(79, 151, 207, 0.42);
 
-  --font-body: var(--font-manrope);
-  --font-display: var(--font-space-grotesk);
-
   --r-1: 6px;
   --r-2: 10px;
   --r-3: 16px;
@@ -41,6 +38,14 @@
   --space-9: 3rem;
   --space-10: 4rem;
   --space-11: 5rem;
+  --section-y: 4.25rem;
+  --hero-y: 4.5rem;
+
+  --text-md: 1.125rem;
+  --text-lg: 1.25rem;
+  --text-xl: clamp(1.4rem, 2vw, 1.75rem);
+  --text-2xl: clamp(1.85rem, 3.4vw, 2.6rem);
+  --text-3xl: clamp(2.75rem, 6vw, 4.5rem);
 }
 
 /* ========================================================================== 
@@ -55,6 +60,8 @@ html {
 }
 
 body {
+  --font-body: var(--font-manrope);
+  --font-display: var(--font-space-grotesk);
   margin: 0;
   background: var(--background);
   color: var(--text);
@@ -97,13 +104,14 @@ a {
 }
 
 .section-block {
-  padding: var(--space-11) 0;
+  padding: var(--section-y) 0;
   border-top: 1px solid var(--line);
+  scroll-margin-top: 96px;
 }
 
 .split-layout {
   display: grid;
-  gap: var(--space-8);
+  gap: var(--space-7);
   align-items: start;
 }
 
@@ -147,11 +155,11 @@ a {
 .hero-kicker,
 .section-kicker,
 .list-title {
-  font-family: var(--font-mono), monospace;
+  font-family: var(--font-display), sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 0.74rem;
-  font-weight: 500;
+  letter-spacing: 0.16em;
+  font-size: 0.76rem;
+  font-weight: 600;
   color: var(--accent);
 }
 
@@ -167,7 +175,7 @@ a {
 
 .section-heading {
   max-width: 54rem;
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-7);
 }
 
 .section-heading--compact {
@@ -177,7 +185,7 @@ a {
 
 .section-heading h2 {
   margin: var(--space-3) 0 0;
-  font-size: clamp(2rem, 3.6vw, 2.9rem);
+  font-size: var(--text-2xl);
   line-height: 1.06;
   letter-spacing: -0.035em;
 }
@@ -250,6 +258,12 @@ a {
   backdrop-filter: blur(14px);
   background: rgba(14, 17, 22, 0.74);
   border-bottom: 1px solid var(--line);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.site-nav--hidden {
+  transform: translateY(-100%);
 }
 
 .site-nav-inner {
@@ -361,7 +375,8 @@ a {
    ========================================================================== */
 .hero-section {
   position: relative;
-  padding: var(--space-11) 0;
+  padding: var(--hero-y) 0;
+  scroll-margin-top: 96px;
 }
 
 .hero-content {
@@ -383,7 +398,7 @@ a {
 
 .hero-copy h1 {
   margin: var(--space-5) 0 var(--space-6);
-  font-size: clamp(2.9rem, 6vw, 4.9rem);
+  font-size: var(--text-3xl);
   line-height: 1;
   letter-spacing: -0.04em;
   max-width: 15ch;
@@ -391,7 +406,7 @@ a {
 
 .hero-summary {
   max-width: 40rem;
-  font-size: 1.16rem;
+  font-size: var(--text-md);
   line-height: 1.7;
 }
 
@@ -563,7 +578,7 @@ a {
 
 .detail-card h3 {
   margin: 0;
-  font-size: 1.3rem;
+  font-size: var(--text-lg);
 }
 
 .detail-period {
@@ -647,6 +662,57 @@ a {
   border: 1px solid var(--line);
 }
 
+.project-metrics {
+  background: var(--surface-2);
+  border-right: 1px solid var(--line);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-4);
+}
+
+.metrics-head {
+  margin: 0;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted-soft);
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.metric-stat {
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  padding: var(--space-4);
+  display: grid;
+  gap: var(--space-2);
+}
+
+.metric-num {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.metric-lab {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
 .project-body {
   padding: var(--space-6);
   display: grid;
@@ -679,7 +745,7 @@ a {
 
 .project-body h3 {
   margin: 0;
-  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-size: var(--text-xl);
 }
 
 .project-desc {
@@ -779,7 +845,8 @@ a {
     gap: var(--space-7);
   }
 
-  .project-media {
+  .project-media,
+  .project-metrics {
     border-right: none;
     border-bottom: 1px solid var(--line);
   }
@@ -816,7 +883,7 @@ a {
   }
 
   .section-block {
-    padding: 3.75rem 0;
+    padding: 3.25rem 0;
   }
 }
 
@@ -829,7 +896,7 @@ a {
   }
 
   .hero-section {
-    padding: 2.75rem 0 2.5rem;
+    padding: 2.5rem 0 2.25rem;
   }
 
   .hero-copy h1 {

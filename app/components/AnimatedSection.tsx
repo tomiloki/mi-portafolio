@@ -16,7 +16,7 @@ export function AnimatedSection({ children, className, delay = 0 }: Props) {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 1, y: 18 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay }}
       className={className}

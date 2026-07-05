@@ -52,12 +52,18 @@ No asumir que el problema viene de fuentes, CSS o render del navegador hasta ver
 - Copy sobrio, descriptivo y sencillo.
 - Evitar chamuyo, claims inflados, frases vendidas y sobreexplicación.
 - Usar CSS custom en `globals.css`; no usar Tailwind directo en JSX.
+- No mover Proyectos antes de Experiencia: el usuario lo denegó explícitamente.
+- Antes de cambiar textos visibles de la página, proponer primero qué se saca y qué se agrega para que el usuario decida.
 - Reutilizar primitivas existentes antes de crear estilos nuevos:
   - `content-card`
   - `split-layout`
   - `section-copy-column`
   - `copy-stack`
   - `section-heading--compact`
+
+## Backlog de discusión
+
+- Evaluar una sección o bloque de reflexión sobre IA. El usuario la considera una idea potencialmente diferencial porque tiene una postura formada al respecto. No implementarla sin discutir enfoque, ubicación y texto.
 
 ## Convención para errores del agente
 

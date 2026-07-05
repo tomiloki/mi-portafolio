@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ProjectSpotlight from "./components/ProjectSpotlight";
+import ProjectDataSpotlight from "./components/ProjectDataSpotlight";
 import { AnimatedSection } from "./components/AnimatedSection";
 
 const CORE_STRENGTHS = [
@@ -44,9 +45,9 @@ export default function Home() {
               <br />front y back.
             </h1>
             <p className="hero-summary">
-              Trabajo sobre sitios en producción y me manejo en el ciclo completo:
-              web front y back, integración de APIs y gestión de servidores con
-              Docker, migraciones y backups.
+              Trabajo en sitios en producción: desarrollo web front y back,
+              integración de APIs y gestión de servidores con Docker,
+              migraciones y backups.
             </p>
 
             <div className="hero-actions">
@@ -114,8 +115,8 @@ export default function Home() {
               <article className="about-story copy-stack">
                 <p>
                   Estudio Ingeniería en Informática y trabajo como desarrollador
-                  full-stack. Me interesa entender el sistema completo: datos,
-                  backend, frontend y entorno donde corre.
+                  full-stack. Trabajo en toda la aplicación: base de datos,
+                  backend, frontend y el servidor donde corre.
                 </p>
                 <p>
                   Hoy trabajo en LeveraWeb con sitios en producción, servidores
@@ -193,10 +194,12 @@ export default function Home() {
         <AnimatedSection>
           <div className="section-heading">
             <p className="section-kicker">Proyectos</p>
-            <h2>Dos proyectos full-stack que construí.</h2>
+            <h2>Proyectos que construí.</h2>
             <p className="section-note">
-              Proyectos desarrollados durante mi formación. Son funcionales y
-              demuestran el stack de punta a punta, pero no están en producción.
+              Tres proyectos hechos durante mi formación: dos aplicaciones web
+              full-stack y un proyecto de machine learning sobre datos de
+              logística. Funcionan y están documentados, aunque no están en
+              producción.
             </p>
           </div>
 
@@ -227,6 +230,26 @@ export default function Home() {
                 "Reserva de horas y perfiles de mascotas.",
                 "Farmacia online con catálogo, carrito y pagos.",
                 "Frontend en Vercel + backend en Render.",
+              ]}
+            />
+
+            <ProjectDataSpotlight
+              title="Predicción de atrasos en última milla"
+              tagline="Clasificación, regresión y clustering sobre 249.231 entregas para anticipar atrasos antes de que ocurran, siguiendo CRISP-DM."
+              status="Minería de datos · CRISP-DM"
+              repoUrl="https://github.com/tomiloki/last-mile-delay-prediction"
+              reportUrl="https://github.com/tomiloki/last-mile-delay-prediction/blob/main/Informe_Final_Mineria.pdf"
+              stack={["Python", "scikit-learn", "XGBoost", "Pandas", "Jupyter"]}
+              metrics={[
+                { value: "249K", label: "entregas" },
+                { value: "0.922", label: "AUC-ROC" },
+                { value: "0.819", label: "R² regresión" },
+                { value: "75%", label: "recall atrasos" },
+              ]}
+              highlights={[
+                "Split temporal (TimeSeriesSplit) para evitar fuga de datos.",
+                "Random Forest: F1 0.59 y AUC 0.922 en clasificación binaria.",
+                "Clustering (GMM) que aísla el 14% de entregas de mayor riesgo.",
               ]}
             />
           </div>

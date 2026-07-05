@@ -68,6 +68,7 @@ mi-portafolio/
 - **Framing:** Tomás es Desarrollador Full Stack. Experiencia principal = LeveraWeb (actual). Livio = proyecto propio pasado que llegó a MVP. Alinear SIEMPRE al CV. Nunca inflar.
 - **Hidrovolt:** ELIMINADO. No mencionar, no incluir.
 - **Tono:** Casual y seguro. Sin "busco oportunidades", "disponible para", "demos defendibles", "marca pensada para empleo", "Propuesta de valor", "Posicionamiento".
+- **Cambios de texto visible:** antes de editar copy de la página, proponer qué se saca y qué se agrega; el usuario decide.
 - **Tildes:** El español sin tildes es error. Siempre: autenticación, documentación, etc.
 - **Encoding:** si aparecen `?` en lugar de tildes, NO asumir que es CSS/fuente. Revisar primero los literales en `app/page.tsx`, `app/components/*`, `app/layout.tsx`, `AGENTS.md` y `CLAUDE.md`.
 - **LinkedIn:** Agregar a nav y contacto cuando se confirme la URL final.
@@ -83,6 +84,8 @@ mi-portafolio/
 - Preferir: composición tipográfica fuerte, screenshots reales de proyectos, micro-interacciones precisas.
 - Animaciones: sutiles y con propósito. Nada que distraiga del contenido.
 - Mobile first en breakpoints.
+- Orden narrativo vigente: mantener Experiencia antes que Proyectos. El usuario denegó mover Proyectos antes de Experiencia.
+- Backlog para discutir: posible sección/reflexión sobre IA como diferencial personal; no implementarla sin aprobación de enfoque y texto.
 
 ## MCPs disponibles
 | MCP | Cuándo usarlo |
